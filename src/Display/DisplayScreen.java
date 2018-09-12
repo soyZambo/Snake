@@ -18,9 +18,9 @@ public class DisplayScreen {
     private int width, height;
 
     public DisplayScreen(String title, int width, int height){
-        this.title = title;
-        this.width = width;
-        this.height = height;
+        this.title = "Snake";
+        this.width = 1000;
+        this.height = 1000;
 
 
 
@@ -47,7 +47,7 @@ public class DisplayScreen {
         canvas.setMaximumSize(new Dimension(width, height));
         canvas.setMinimumSize(new Dimension(width, height));
         canvas.setFocusable(false);
-        canvas.setBackground(Color.black);
+        canvas.setBackground(Color.green);
 
         frame.add(canvas);
         frame.pack();
