@@ -1,14 +1,12 @@
 package Game.Entities.Dynamic;
 
+import Main.GameSetUp;
 import Main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
-/**
- * Created by AlexVR on 7/2/2018.
- */
 public class Player {
 
     public int lenght;
@@ -20,7 +18,7 @@ public class Player {
 
     public int moveCounter;
 
-    public String direction;//is your first name one?
+    public String direction;
 
     public Player(Handler handler){
         this.handler = handler;
@@ -39,14 +37,23 @@ public class Player {
             checkCollisionAndMove();
             moveCounter=0;
         }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)){
             direction="Up";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)){
             direction="Down";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)|| handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)){
             direction="Left";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)|| handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)){
             direction="Right";
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
+        	lenght++;
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
+        	//render();
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_PLUS)) {
+
+        	
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
+        	
         }
 
     }
@@ -104,7 +111,7 @@ public class Player {
         Random r = new Random();
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.gray);
+                g.setColor(Color.orange);
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
@@ -233,9 +240,10 @@ public class Player {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 
                 handler.getWorld().playerLocation[i][j]=false;
-
+                
             }
         }
+        //GameOver();
     }
 
     public boolean isJustAte() {

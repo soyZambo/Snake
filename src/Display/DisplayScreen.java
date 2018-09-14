@@ -6,10 +6,6 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-/**
- * Created by AlexVR on 7/1/2018.
- */
-
 public class DisplayScreen {
 
     private JFrame frame;
@@ -18,9 +14,9 @@ public class DisplayScreen {
     private int width, height;
 
     public DisplayScreen(String title, int width, int height){
-        this.title = "Snake";
-        this.width = 1000;
-        this.height = 1000;
+        this.title = title;
+        this.width = width;
+        this.height = height;
 
 
 
@@ -34,7 +30,7 @@ public class DisplayScreen {
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        frame.setBackground(Color.black);
+        frame.setBackground(Color.green);
 
         try {
             frame.setIconImage(ImageIO.read(new File("res/Sheets/icon.png")));

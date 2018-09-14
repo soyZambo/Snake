@@ -4,9 +4,6 @@ import Main.Handler;
 
 import java.awt.*;
 
-/**
- * Created by AlexVR on 7/1/2018.
- */
 public abstract class State {
 
     private static State currentState = null;
@@ -18,8 +15,6 @@ public abstract class State {
     public static State getState(){
         return currentState;
     }
-
-    //CLASS
 
     protected Handler handler;
 

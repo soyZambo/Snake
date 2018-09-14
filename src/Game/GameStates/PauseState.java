@@ -7,9 +7,6 @@ import UI.UIManager;
 
 import java.awt.*;
 
-/**
- * Created by AlexVR on 7/1/2018.
- */
 public class PauseState extends State {
 
     private int count = 0;

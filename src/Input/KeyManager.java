@@ -3,11 +3,6 @@ package Input;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-
-/**
- * Created by AlexVR on 7/1/2018.
- */
-
 public class KeyManager implements KeyListener {
 
 	private boolean[] keys,justPressed,cantPress;

@@ -2,9 +2,6 @@ package Resources;
 
 import java.awt.image.BufferedImage;
 
-/**
- * Created by AlexVR on 7/1/2018.
- */
 public class SpriteSheet {
 
 

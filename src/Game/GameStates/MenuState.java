@@ -9,9 +9,6 @@ import UI.UIManager;
 
 import java.awt.*;
 
-/**
- * Created by AlexVR on 7/1/2018.
- */
 public class MenuState extends State {
 
     private UIManager uiManager;

@@ -120,7 +120,7 @@ public class GameSetUp implements Runnable {
 
         //initiallizes everything in order to run without breaking
         init();
-
+        int speed = 5;
         int fps = 60;
         double timePerTick = 1000000000 / fps;
         double delta = 0;
@@ -131,6 +131,9 @@ public class GameSetUp implements Runnable {
 
         while(running){
             //makes sure the games runs smoothly at 60 FPS
+        	/*if(speed>0 && speed<11) {
+        	fps *= 1/speed;
+        	}else return;*/
             now = System.nanoTime();
             delta += (now - lastTime) / timePerTick;
             timer += now - lastTime;
