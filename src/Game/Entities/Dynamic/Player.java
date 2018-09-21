@@ -38,20 +38,27 @@ public class Player {
             moveCounter=0;
         }
         if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_W)){
-            direction="Up";
+            if(direction != "Down") {
+        	direction="Up";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_S)){
-            direction="Down";
+        	if(direction != "Up") {
+        	direction="Down";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)|| handler.getKeyManager().keyJustPressed(KeyEvent.VK_A)){
-            direction="Left";
+        	if(direction != "Right") {
+        	direction="Left";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)|| handler.getKeyManager().keyJustPressed(KeyEvent.VK_D)){
-            direction="Right";
+        	if(direction != "Left") {
+        	direction="Right";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
-        	lenght++;
+        	if(lenght <= 7) {
+        	Eat();
+        	handler.getWorld().appleOnBoard = true;
+        	}
+        	
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
         	//render();
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_PLUS)) {
-
-        	
+        	        	
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
         	
         }
