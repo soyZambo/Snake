@@ -3,9 +3,14 @@ package Game.Entities.Dynamic;
 import Main.GameSetUp;
 import Main.Handler;
 
+
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+
+import javax.swing.JOptionPane;
+import Game.GameStates.State;
 
 public class Player {
 
@@ -15,9 +20,10 @@ public class Player {
 
     public int xCoord;
     public int yCoord;
+    public int points;
 
     public int moveCounter;
-
+    public int speed=5;
     public String direction;
 
     public Player(Handler handler){
@@ -28,12 +34,14 @@ public class Player {
         direction= "Right";
         justAte = false;
         lenght= 1;
+        points=0;
 
     }
 
     public void tick(){
+    	
         moveCounter++;
-        if(moveCounter>=5) {
+        if(moveCounter>=speed) {
             checkCollisionAndMove();
             moveCounter=0;
         }
@@ -50,21 +58,29 @@ public class Player {
         	if(direction != "Left") {
         	direction="Right";}
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
-        	if(lenght <= 7) {
+        	if(lenght <= 1000) {
         	Eat();
         	handler.getWorld().appleOnBoard = true;
         	}
         	
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)) {
-        	//render();
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_PLUS)) {
-        	        	
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_P)) {
+        	//render(); Pause the game on pressed, there is an image for so.
+        	State.setState(handler.getGame().pauseState);
         	
+        	
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)) {
+        	        	//run faster
+        	speed--;}
+        	
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_MINUS)) {
+        	speed++;    	
         }
 
     }
-
+//Here I can change the size of the game for example if a ireduce the size of the world i 
+    //have to reduce the xCoord and y
+    
+    
     public void checkCollisionAndMove(){
         handler.getWorld().playerLocation[xCoord][yCoord]=false;
         int x = xCoord;
@@ -116,9 +132,14 @@ public class Player {
 
     public void render(Graphics g,Boolean[][] playeLocation){
         Random r = new Random();
+        //told by others to use a gfont on render method, after looking for Graphics class, then i knew.
+        // Points 
+        Font pointTxt = new Font("Arial", Font.PLAIN,20);
+        g.setFont(pointTxt);
+        g.drawString("points :" +points,500 , 550);
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.orange);
+                g.setColor(Color.GREEN);
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
                     g.fillRect((i*handler.getWorld().GridPixelsize),
@@ -126,15 +147,29 @@ public class Player {
                             handler.getWorld().GridPixelsize,
                             handler.getWorld().GridPixelsize);
                 }
-
-            }
-        }
-
-
+                //selfCrash new variable to set the value of the body to it
+                //for the for loop it keeps iterating therefore its never stops the command, how to solve this
+                //possibly a while,keep increasing until so it stops, but with a while the program is very slow, need guidence.
+                 
+                	for(int actualBody=0;actualBody< handler.getWorld().body.size();actualBody++) {
+                
+                	if(xCoord== handler.getWorld().body.get(actualBody).x && yCoord== handler.getWorld().body.get(actualBody).y) {
+                		kill(); //cannot press Yes, cause of the For loop.
+//                	JOptionPane.showMessageDialog(null, "Game Over", "", JOptionPane.INFORMATION_MESSAGE);
+//                	System.exit(0);
+                	
+                		
+                	}}}
+                	
+                	}
     }
+
+          
+    
 
     public void Eat(){
         lenght++;
+         points=points +5; //points increment
         Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false;
         handler.getWorld().appleOnBoard=false;
@@ -239,10 +274,13 @@ public class Player {
         }
         handler.getWorld().body.addLast(tail);
         handler.getWorld().playerLocation[tail.x][tail.y] = true;
+        //implement the if eat increase points label
+       // System.out.println(points);
     }
 
     public void kill(){
         lenght = 0;
+        int again;
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
 
@@ -250,8 +288,26 @@ public class Player {
                 
             }
         }
+        
+       again=JOptionPane.showConfirmDialog(null, " Final score:   " +points, "Game Over, Try again?", JOptionPane.YES_NO_OPTION);
+        if(again==0) {
+        
+        	State.setState(handler.getGame().menuState);}
+        else
+        	System.exit(0);
+        
+        //create a frame with Game Over message if killed.
         //GameOver();
+        
     }
+    
+    
+    
+    	
+    		
+    	
+    
+    
 
     public boolean isJustAte() {
         return justAte;

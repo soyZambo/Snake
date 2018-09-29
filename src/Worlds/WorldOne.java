@@ -13,7 +13,7 @@ public class WorldOne extends WorldBase{
 
     public WorldOne (Handler handler) {
         super(handler);
-
+//pixel size of the Grid
         //has to be a number bigger than 20 and even
         GridWidthHeightPixelCount = 60;
         GridPixelsize = (600/GridWidthHeightPixelCount);

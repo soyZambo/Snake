@@ -25,7 +25,7 @@ public class GameSetUp implements Runnable {
     private DisplayScreen display;
     private int width, height;
     public String title;
-
+    public int speed;
     private boolean running = false;
     private Thread thread;
 
@@ -85,6 +85,7 @@ public class GameSetUp implements Runnable {
         State.setState(menuState);
 
         try {
+        	//beethoven.wav gives issues???
 
             audioFile = getClass().getResourceAsStream("/music/nature.wav");
             audioStream = AudioSystem.getAudioInputStream(audioFile);
@@ -120,9 +121,9 @@ public class GameSetUp implements Runnable {
 
         //initiallizes everything in order to run without breaking
         init();
-        int speed = 5;
+        int speed = 2;
         int fps = 60;
-        double timePerTick = 1000000000 / fps;
+        double timePerTick = (700000000 * speed) / fps;
         double delta = 0;
         long now;
         long lastTime = System.nanoTime();
@@ -212,7 +213,6 @@ public class GameSetUp implements Runnable {
     }
 
     public int getHeight(){
-        return height;
-    }
+        return height;}
 }
 
